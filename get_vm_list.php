@@ -24,8 +24,7 @@ foreach ($vmList as $vm) {
 	}
 
 	foreach ($fileValueNames as $fileValueName) {
-		var_dump($fileValueName);
-		$configs[$vm][$valueName] = getConfigFileValue($fileValueName, $targetVmXmlPath);
+		$configs[$vm][$fileValueName] = getConfigFileValue($fileValueName, $targetVmXmlPath);
 	}
 }
 
@@ -52,7 +51,11 @@ foreach ($configs as $vm => $config) {
 	echo ', ';
 	foreach ($valueNames as $valueName) {
 		echo $configs[$vm][$valueName];
-		//echo $configs[$vm][$fileValueName];
+		echo ', ';
+	}
+
+	foreach ($fileValueNames as $valueName) {
+		echo $configs[$vm][$fileValueName];
 		echo ', ';
 	}
 	echo "\n";
