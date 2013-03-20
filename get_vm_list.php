@@ -11,7 +11,7 @@ var_dump($vmList);
 
 $configs = array();
 
-$valueNames = array('vcpu', 'memory', 'uuid');
+$valueNames = array('vcpu', 'memory');
 $fileValueNames = array('source');
 
 foreach ($vmList as $vm) {
