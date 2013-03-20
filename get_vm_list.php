@@ -1,11 +1,13 @@
 <?php
 
-$xmlBase = 'xml';
-// $xmlBase = '/etc/libvirt/qemu';
+// $xmlBase = 'xml';
+$xmlBase = '/etc/libvirt/qemu';
 
 $result = `virsh list --all | grep running | awk '{print $2}'`;
 $vmList = explode("\n", $result);
 //$vmList = array('vm_name', 'vm_name2');
+var_dump($vmList);
+
 
 $configs = array();
 
@@ -45,6 +47,8 @@ function getConfigFileValue($name, $targetVmXmlPath) {
 	$value = `cat $targetVmXmlPath | grep $name | grep file`;
 	preg_match("/'(.*)'/", $value, $matches);
 	$value = $matches[1];
+	$imageName = $values[count($values) -1];
+	$pathName = str_replace($imageName, '', $value);
 	return $value;
 }
 
@@ -58,7 +62,7 @@ foreach ($configs as $vm => $config) {
 
 	foreach ($fileValueNames as $valueName) {
 		echo $configs[$vm][$fileValueName];
-		echo ', ';
+		//echo ', ';
 	}
 	echo "\n";
 }
