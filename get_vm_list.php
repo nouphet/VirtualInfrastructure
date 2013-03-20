@@ -24,6 +24,7 @@ foreach ($vmList as $vm) {
 	}
 
 	foreach ($fileValueNames as $fileValueName) {
+		var_dump($fileValueName);
 		$configs[$vm][$valueName] = getConfigFileValue($fileValueName, $targetVmXmlPath);
 	}
 }
@@ -41,15 +42,8 @@ function getConfigValue($name, $targetVmXmlPath) {
 
 function getConfigFileValue($name, $targetVmXmlPath) {
 	$value = `cat $targetVmXmlPath | grep $name | grep file`;
-
-	$value = str_replace("<$name>", '', $value);
-	$value = str_replace("</$name>", '', $value);
-	$value = trim($value, "\n");
-	$value = trim($value, ' ');
-	$line  = $value;
-	         preg_match("/'(.*)'/", $line, $matches);
-	$value = $matches;
-
+	preg_match("/'(.*)'/", $value, $matches);
+	$value = $matches[1];
 	return $value;
 }
 
