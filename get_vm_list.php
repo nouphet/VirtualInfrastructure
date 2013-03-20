@@ -5,7 +5,7 @@ $xmlBase = '/etc/libvirt/qemu';
 
 $result = `virsh list --all | grep running | awk '{print $2}'`;
 $vmList = explode("\n", $result);
-//$vmList = array('vm_name', 'vm_name2');
+// $vmList = array('vm_name', 'vm_name2');
 var_dump($vmList);
 
 
@@ -47,22 +47,31 @@ function getConfigFileValue($name, $targetVmXmlPath) {
 	$value = `cat $targetVmXmlPath | grep $name | grep file`;
 	preg_match("/'(.*)'/", $value, $matches);
 	$value = $matches[1];
-	$imageName = $values[count($values) -1];
-	$pathName = str_replace($imageName, '', $value);
+
 	return $value;
 }
 
+$csv = array();
+
 foreach ($configs as $vm => $config) {
-	echo $vm;
-	echo ', ';
+	$output = array();
+	$output[] = $vm;
+	
 	foreach ($valueNames as $valueName) {
-		echo $configs[$vm][$valueName];
-		echo ', ';
+		$output[] = $configs[$vm][$valueName];
 	}
 
 	foreach ($fileValueNames as $valueName) {
-		echo $configs[$vm][$fileValueName];
-		//echo ', ';
+		if ($valueName === 'source') {
+			$path = $configs[$vm][$fileValueName];
+			$output[] = dirname($path);
+			$output[] = basename($path);
+		} else {
+			$output[] = $configs[$vm][$fileValueName];
+		}
 	}
-	echo "\n";
+
+	$csv[] = join(', ', $output);
 }
+
+echo join("\n", $csv);
