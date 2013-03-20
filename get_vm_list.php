@@ -46,6 +46,8 @@ function getConfigFileValue($name, $targetVmXmlPath) {
 	$value = str_replace("</$name>", '', $value);
 	$value = trim($value, "\n");
 	$value = trim($value, ' ');
+	$value = preg_match("/'(.*)'/", $value, $matches);
+	$value = $matches;
 
 	return $value;
 }
