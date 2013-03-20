@@ -3,7 +3,9 @@
 $xmlBase = 'xml';
 // $xmlBase = '/etc/libvirt/qemu';
 
-$vmList = array('vm_name', 'vm_name2');
+$result = `virsh list --all | grep running | awk '{print $2}'`;
+$vmList = explode("\n", $result);
+//$vmList = array('vm_name', 'vm_name2');
 
 $configs = array();
 
