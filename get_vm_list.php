@@ -3,7 +3,8 @@
 // $xmlBase = 'xml';
 $xmlBase = '/etc/libvirt/qemu';
 
-$result = `virsh list --all | grep running | awk '{print $2}'`;
+//$result = `virsh list --all | grep running | awk '{print $2}'`;
+$result = `virsh list --all | awk '{print $2}' | sort`;
 $vmList = explode("\n", $result);
 // $vmList = array('vm_name', 'vm_name2');
 var_dump($vmList);
@@ -39,6 +40,9 @@ function getConfigValue($name, $targetVmXmlPath) {
 	$value = str_replace("</$name>", '', $value);
 	$value = trim($value, "\n");
 	$value = trim($value, ' ');
+	if ($name == "memory" ) {
+		$value = $value / 1024;
+	}
 
 	return $value;
 }
