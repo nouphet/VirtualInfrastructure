@@ -1,5 +1,5 @@
 #!/bin/bash
 
-LANG=C
+export LANG=C
 php get_vm_list.php
 

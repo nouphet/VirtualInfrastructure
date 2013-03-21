@@ -3,8 +3,13 @@
 // $xmlBase = 'xml';
 $xmlBase = '/etc/libvirt/qemu';
 
+$nodeName = `virsh hostname`;
+	$nodeName = trim($nodeName, "\n");
+	$nodeName = trim($nodeName, ' ');
+	$nodeNames = explode('.', $nodeName);
+	$nodeName = $nodeNames[0];
 //$result = `virsh list --all | grep running | awk '{print $2}'`;
-$result = `virsh list --all | awk '{print $2}' | sort`;
+$result = `virsh list --all | grep -v ^$ | grep -v "Id" | grep -v "\-\-\-\-" | awk '{print $2}' | sort`;
 $vmList = explode("\n", $result);
 // $vmList = array('vm_name', 'vm_name2');
 var_dump($vmList);
@@ -31,6 +36,8 @@ foreach ($vmList as $vm) {
 	foreach ($fileValueNames as $fileValueName) {
 		$configs[$vm][$fileValueName] = getConfigFileValue($fileValueName, $targetVmXmlPath);
 	}
+
+	$configs[$vm][$nodeName] = $nodeName;
 }
 
 function getConfigValue($name, $targetVmXmlPath) {
@@ -59,8 +66,9 @@ $csv = array();
 
 foreach ($configs as $vm => $config) {
 	$output = array();
+	$output[] = $configs[$vm][$nodeName];
 	$output[] = $vm;
-	
+
 	foreach ($valueNames as $valueName) {
 		$output[] = $configs[$vm][$valueName];
 	}
