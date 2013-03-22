@@ -4,7 +4,6 @@
 $env = 'dev';
 
 if ($env === 'production') {
-
 	$xmlBase = '/etc/libvirt/qemu';
 
 	$nodeName = `virsh hostname`;
@@ -32,7 +31,6 @@ $valueNames = array('vcpu', 'memory');
 $fileValueNames = array('source');
 
 foreach ($vmList as $vm) {
-	echo 'read ' . $vm . "\n";
 
 	// 最終的に出力したい値を格納していく配列
 	$configs[$vm] = array();
@@ -92,9 +90,12 @@ foreach ($configs as $vm => $config) {
 		} else {
 			$output[] = $configs[$vm][$fileValueName];
 		}
+		if ($env === 'dev') {
+			$output[] = 'running';
+		}
 	}
 
-	$csv[] = join(', ', $output);
+	$csv[] = $output;
 }
 
-echo join("\n", $csv);
+echo json_encode($csv);
