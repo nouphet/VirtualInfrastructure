@@ -1,7 +1,12 @@
 <?php
 
+`export LC_ALL=C`;
+
 $env = 'production';
 //$env = 'dev';
+
+// インスタンスごとの実行状態マスターリスト
+$vmStatus = array();
 
 if ($env === 'production') {
 	$xmlBase = '/etc/libvirt/qemu';
@@ -12,10 +17,17 @@ if ($env === 'production') {
 	$nodeNames = explode('.', $nodeName);
 	$nodeName = $nodeNames[0];
 
-	$result = `virsh list --all | grep -v ^$ | grep -v "Id" | grep -v "\-\-\-\-" | awk '{print $2}' | sort`;
+	$result = `virsh list --all | grep -v ^$ | grep -v "Id" | grep -v "\-\-\-\-" | awk '{print $2", "$3 " " $4}' | sort`;
 
-	$vmList = explode("\n", $result);
+	$tmp = explode("\n", $result);
 
+	$vmList = array();
+	
+	foreach ($tmp as $each) {
+		list($vmName, $status) = explode(',', $each);
+		$vmList[] = $vmName;
+		$vmStatus[$vmName] = trim($status);
+	}
 } else {
 	$xmlBase = 'xml';
 
@@ -90,9 +102,12 @@ foreach ($configs as $vm => $config) {
 		} else {
 			$output[] = $configs[$vm][$fileValueName];
 		}
-		if ($env === 'dev') {
-			$output[] = 'running';
-		}
+	}
+
+	if ($env === 'dev') {
+		$output[] = 'running';
+	} else {
+		$output[] = $vmStatus[$vm];
 	}
 
 	$csv[] = $output;
