@@ -28,11 +28,17 @@
 				</button>
 				<a class="brand" href="#">Virtual Infrastructure</a>
 				<div class="nav-collapse collapse">
-					<ul class="nav"></ul>
+					<ul class="nav">
+						<li><a href="?filter_by=status&condition=running">実行中</a></li>
+						<li><a href="?filter_by=status&condition=shut off">停止中</a></li>
+						<li><a href="?filter_by=host&condition=kvm01">kvm01</a></li>
+						<li><a href="?filter_by=host&condition=kvm02">kvm02</a></li>
+					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
+
 	<div class="container">
 		<table class="table">
 			<thead>
