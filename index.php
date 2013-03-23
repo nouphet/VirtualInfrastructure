@@ -1,7 +1,9 @@
 <?php
 
 $inputs = array();
-$inputs[] = file_get_contents('http://localhost:8080/get_vm_web.php');
+//$inputs[] = file_get_contents('http://localhost:8080/get_vm_web.php');
+$inputs[] = file_get_contents('http://172.16.8.3:8080/get_vm_web.php');
+$inputs[] = file_get_contents('http://172.16.8.4:8080/get_vm_web.php');
 
 //$inputs[] = '[["kvm_local","vm_name","1",2048,"\/vm","takehara-test01.img","running"],["kvm_local","vm_name2","2",2048,"\/vm","takehara-test02.img","not running"]]';
 
