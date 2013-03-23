@@ -18,6 +18,7 @@ if ($env === 'production') {
 	$nodeName = $nodeNames[0];
 
 	$result = `virsh list --all | grep -v ^$ | grep -v "Id" | grep -v "\-\-\-\-" | awk '{print $2", "$3 " " $4}' | sort`;
+	$result = trim($result);
 
 	$tmp = explode("\n", $result);
 
