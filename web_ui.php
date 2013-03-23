@@ -49,9 +49,9 @@
 			<?php foreach ($tableData as $row): ?>
 				<?php if ($row[6] === 'running') : ?>
 				<tr class="success">
-				<? else : ?>
+				<?php else : ?>
 				<tr class="">
-				<? endif ?>
+				<?php endif ?>
 					<td><?php echo $row[0]; ?></td>
 					<td><?php echo $row[1]; ?></td>
 					<td><?php echo $row[2]; ?></td>
