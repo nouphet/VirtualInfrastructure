@@ -36,27 +36,31 @@
 	<div class="container">
 		<table class="table">
 			<thead>
-			<th>host</th>
-			<th>instance</th>
-			<th>cpu</th>
-			<th>memory</th>
-			<th>image path</th>
-			<th>disk image</th>
-			<th>status</th>
+				<th>host</th>
+				<th>instance</th>
+				<th>cpu</th>
+				<th>memory</th>
+				<th>image path</th>
+				<th>disk image</th>
+				<th>status</th>
 			</thead>
 
 			<tbody>
 			<?php foreach ($tableData as $row): ?>
-			<tr>
-				<td><?php echo $row[0]; ?></td>
-				<td><?php echo $row[1]; ?></td>
-				<td><?php echo $row[2]; ?></td>
-				<td><?php echo $row[3]; ?></td>
-				<td><?php echo $row[4]; ?></td>
-				<td><?php echo $row[5]; ?></td>
-				<td><?php echo $row[6]; ?></td>
-			</tr>
-				<?php endforeach ?>
+				<?php if ($row[6] === 'running') : ?>
+				<tr class="success">
+				<? else : ?>
+				<tr class="">
+				<? endif ?>
+					<td><?php echo $row[0]; ?></td>
+					<td><?php echo $row[1]; ?></td>
+					<td><?php echo $row[2]; ?></td>
+					<td><?php echo $row[3]; ?></td>
+					<td><?php echo $row[4]; ?></td>
+					<td><?php echo $row[5]; ?></td>
+					<td><?php echo $row[6]; ?></td>
+				</tr>
+			<?php endforeach ?>
 			</tbody>
 		</table>
 
