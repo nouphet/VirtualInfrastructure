@@ -1,7 +1,7 @@
 <?php
 
 $inputs = array();
-$inputs[] = file_get_contents('http://localhost/VirtualInfrastructure/get_vm_web.php');
+$inputs[] = file_get_contents('http://localhost:8080/get_vm_web.php');
 
 //$inputs[] = '[["kvm_local","vm_name","1",2048,"\/vm","takehara-test01.img","running"],["kvm_local","vm_name2","2",2048,"\/vm","takehara-test02.img","not running"]]';
 
@@ -62,16 +62,16 @@ foreach ($data as $vmName => $status) {
 		<th>status</th>
 	</thead>
 	<tbody>
-	<? foreach ($tableData as $row): ?>
+	<?php foreach ($tableData as $row): ?>
 		<tr>
-			<td><? echo $row[0] ?></td>
-			<td><? echo $row[1] ?></td>
-			<td><? echo $row[2] ?></td>
-			<td><? echo $row[3] ?></td>
-			<td><? echo $row[4] ?></td>
-			<td><? echo $row[5] ?></td>
-			<td><? echo $row[6] ?></td>
+			<td><?php echo $row[0]; ?></td>
+			<td><?php echo $row[1]; ?></td>
+			<td><?php echo $row[2]; ?></td>
+			<td><?php echo $row[3]; ?></td>
+			<td><?php echo $row[4]; ?></td>
+			<td><?php echo $row[5]; ?></td>
+			<td><?php echo $row[6]; ?></td>
 		</tr>
-	<? endforeach ?>
+	<?php endforeach ?>
 	</tbody>
 </table>

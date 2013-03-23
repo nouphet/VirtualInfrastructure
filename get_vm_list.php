@@ -1,7 +1,7 @@
 <?php
 
-//$env = 'production';
-$env = 'dev';
+$env = 'production';
+//$env = 'dev';
 
 if ($env === 'production') {
 
@@ -32,7 +32,6 @@ $valueNames = array('vcpu', 'memory');
 $fileValueNames = array('source');
 
 foreach ($vmList as $vm) {
-	echo 'read ' . $vm . "\n";
 
 	// 最終的に出力したい値を格納していく配列
 	$configs[$vm] = array();

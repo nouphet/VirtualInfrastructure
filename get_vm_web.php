@@ -1,7 +1,7 @@
 <?php
 
-//$env = 'production';
-$env = 'dev';
+$env = 'production';
+//$env = 'dev';
 
 if ($env === 'production') {
 	$xmlBase = '/etc/libvirt/qemu';
