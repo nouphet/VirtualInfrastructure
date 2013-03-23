@@ -29,10 +29,13 @@
 				<a class="brand" href="#">Virtual Infrastructure</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
+						<li><a href="?filter_by=all">全て</a></li>
 						<li><a href="?filter_by=status&condition=running">実行中</a></li>
 						<li><a href="?filter_by=status&condition=shut off">停止中</a></li>
 						<li><a href="?filter_by=host&condition=kvm01">kvm01</a></li>
 						<li><a href="?filter_by=host&condition=kvm02">kvm02</a></li>
+						<li><a href="?filter_by=host_running&condition=kvm01">kvm01で実行中</a></li>
+						<li><a href="?filter_by=host_running&condition=kvm02">kvm02で実行中</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>

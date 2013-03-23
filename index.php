@@ -81,8 +81,28 @@ if ($filter === 'status') {
 	}
 
 	$tableData = $filteredData;
+} elseif ($filter === 'host_running') {
+	$hostName = $_GET['condition'];
+
+	foreach ($tableData as $row) {
+		if ($row[0] === $hostName && $row[6] === 'running') {
+			$filteredData[] = $row;
+		}
+	}
+
+	$tableData = $filteredData;
 }
 
+$total = array('cpu' => 0, 'memory' => 0);
+
+foreach ($tableData as $row) {
+	$total['cpu'] += $row[2];
+	$total['memory'] += $row[3];
+}
+
+$additionalInformation = array('-','-',$total['cpu'], $total['memory'],'-','-','-');
+
+$tableData[] = $additionalInformation;
 
 include('web_ui.php');
 
