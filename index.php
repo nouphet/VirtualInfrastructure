@@ -1,13 +1,17 @@
 <?php
 
+$host = $_SERVER['HTTP_HOST'];
+
 $inputs = array();
-//$inputs[] = file_get_contents('http://localhost:8080/get_vm_web.php');
-$inputs[] = file_get_contents('http://172.16.8.3:8080/get_vm_web.php');
-$inputs[] = file_get_contents('http://172.16.8.4:8080/get_vm_web.php');
 
-//$inputs[] = '[["kvm_local","vm_name","1",2048,"\/vm","takehara-test01.img","running"],["kvm_local","vm_name2","2",2048,"\/vm","takehara-test02.img","not running"]]';
-
-//$inputs[] = '[["kvm_local2","vm_name","1",2048,"\/vm","takehara-test01.img","not running"],["kvm_local2","vm_name2","2",2048,"\/vm","takehara-test02.img","not running"]]';
+if ($host === 'localhost') {
+	$inputs[] = '[["kvm_local","vm_name","1",2048,"\/vm","takehara-test01.img","running"],["kvm_local","vm_name2","2",2048,"\/vm","takehara-test02.img","not running"]]';
+	$inputs[] = '[["kvm_local2","vm_name","1",2048,"\/vm","takehara-test01.img","not running"],["kvm_local2","vm_name2","2",2048,"\/vm","takehara-test02.img","not running"]]';
+} else {
+//	$inputs[] = file_get_contents('http://localhost:8080/get_vm_web.php');
+	$inputs[] = file_get_contents('http://172.16.8.3:8080/get_vm_web.php');
+	$inputs[] = file_get_contents('http://172.16.8.4:8080/get_vm_web.php');
+}
 
 // インプットデータをまとめる処理
 $data = array();
@@ -51,29 +55,6 @@ foreach ($data as $vmName => $status) {
 	}
 }
 
-?>
+include('web_ui.php');
 
-<table>
-	<thead>
-		<th>host</th>
-		<th>instance</th>
-		<th>cpu</th>
-		<th>memory</th>
-		<th>image path</th>
-		<th>disk image</th>
-		<th>status</th>
-	</thead>
-	<tbody>
-	<?php foreach ($tableData as $row): ?>
-		<tr>
-			<td><?php echo $row[0]; ?></td>
-			<td><?php echo $row[1]; ?></td>
-			<td><?php echo $row[2]; ?></td>
-			<td><?php echo $row[3]; ?></td>
-			<td><?php echo $row[4]; ?></td>
-			<td><?php echo $row[5]; ?></td>
-			<td><?php echo $row[6]; ?></td>
-		</tr>
-	<?php endforeach ?>
-	</tbody>
-</table>
+?>
