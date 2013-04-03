@@ -2,8 +2,12 @@
 
 `export LC_ALL=C`;
 
-$env = 'production';
-//$env = 'dev';
+$host = $_SERVER['HTTP_HOST'];
+if ($host === 'localhost') {
+	$env = 'dev';
+} else {
+	$env = 'production';
+}
 
 // インスタンスごとの実行状態マスターリスト
 $vmStatus = array();
