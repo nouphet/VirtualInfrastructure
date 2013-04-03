@@ -1,0 +1,4 @@
+image: /vm/shiojiri/mobile-dev01.img
+file format: raw
+virtual size: 100G (107374182400 bytes)
+disk size: 8.0G
