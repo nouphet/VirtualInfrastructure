@@ -11,6 +11,7 @@ if ($host === 'localhost') {
 	$inputs[] = '[["kvm02","vm_name4","1",2048,"\/vm","takehara-test01.img","shut off"],["kvm02","vm_name2","2",2048,"\/vm","takehara-test02.img","shut off"]]';
 } else {
 //	$inputs[] = file_get_contents('http://localhost:8080/get_vm_web.php');
+	$inputs[] = file_get_contents('http://172.16.8.2:8080/get_vm_web.php');
 	$inputs[] = file_get_contents('http://172.16.8.3:8080/get_vm_web.php');
 	$inputs[] = file_get_contents('http://172.16.8.4:8080/get_vm_web.php');
 }

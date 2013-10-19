@@ -34,8 +34,10 @@
 						<li><a href="?filter_by=status&condition=shut off">停止中</a></li>
 						<li><a href="?filter_by=host&condition=kvm01">kvm01</a></li>
 						<li><a href="?filter_by=host&condition=kvm02">kvm02</a></li>
+						<li><a href="?filter_by=host&condition=kvm03">kvm03</a></li>
 						<li><a href="?filter_by=host_running&condition=kvm01">kvm01で実行中</a></li>
 						<li><a href="?filter_by=host_running&condition=kvm02">kvm02で実行中</a></li>
+						<li><a href="?filter_by=host_running&condition=kvm03">kvm03で実行中</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
