@@ -70,6 +70,7 @@ function getConfigValue($name, $targetVmXmlPath) {
 	$value = `cat $targetVmXmlPath | grep $name`;
 
 	$value = str_replace("<$name>", '', $value);
+	$value = str_replace("<$name unit='KiB'>", '', $value);
 	$value = str_replace("</$name>", '', $value);
 	$value = trim($value, "\n");
 	$value = trim($value, ' ');
